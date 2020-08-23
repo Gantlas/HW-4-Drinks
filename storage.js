@@ -149,7 +149,7 @@ const removeDrink = () => {
   const node = getDrinkNode(name);
 
   if (!node) {
-    hideModal();
+    // hideModal();
     alert("the are no drinks with that name");
   } else {
     drinks.deleteValue(name);
