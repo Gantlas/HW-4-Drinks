@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Drinks</title>
+  </head>
+  <body>
+    <section class="wrapper">
+      <section class="drink-create">
+        <h2 class="header">New drink</h2>
+        <form id="drink-create__form">
+          <label for="create-name">Drink name</label>
+          <input id="create-name" type="text" name="name" required />
+          <label for="create-composition">Drink composition</label>
+          <input
+            id="create-composition"
+            type="text"
+            name="composition"
+            required
+          />
+          <button class="btn-create">Create drink</button>
+        </form>
+      </section>
+      <section class="drink-list-wrapper">
+        <h2 class="header">Drinks</h2>
+        <ul class="drink-list">
+          <li class="drink-item">cola</li>
+          <li class="drink-item">fanta</li>
+          <li class="drink-item">vodka</li>
+        </ul>
+        <section class="btn-wrapper">
+          <button class="btn-search__open">search drink</button>
+          <button class="btn-remove__open">remove drink</button>
+        </section>
+      </section>
+      <section class="drink-info">
+        <h2 class="header">Drink info</h2>
+        <p class="drink-name">No info</p>
+        <p class="drink-composition">No info</p>
+      </section>
+    </section>
+    <form id="search-form">
+      <h2 class="header">Search drink</h2>
+      <label for="search-drink">Enter name of drink</label><br />
+      <input
+        id="search-drink"
+        name="search-drink"
+        type="text"
+        placeholder="enter drink name"
+        required
+      />
+      <button class="btn-search">search</button>
+    </form>
+    <!-- <div class="cover-block"></div> -->
+    <script src="storage.js"></script>
+  </body>
+</html>
