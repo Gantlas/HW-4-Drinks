@@ -13,7 +13,9 @@
         <form id="drink-create__form">
           <label for="create-name">Drink name</label>
           <input id="create-name" type="text" name="name" required />
-          <label for="create-composition">Drink composition</label>
+          <label for="create-composition"
+            >Drink composition<br />(separate with ';')</label
+          >
           <input
             id="create-composition"
             type="text"
@@ -38,11 +40,11 @@
       <section class="drink-info">
         <h2 class="header">Drink info</h2>
         <p class="drink-name">No info</p>
-        <p class="drink-composition">No info</p>
+        <p class="drink-composition">Composition: No info</p>
       </section>
     </section>
     <form id="search-form">
-      <h2 class="header">Search drink</h2>
+      <h2 class="header"></h2>
       <label for="search-drink">Enter name of drink</label><br />
       <input
         id="search-drink"
@@ -52,8 +54,9 @@
         required
       />
       <button class="btn-search">search</button>
+      <button class="btn-remove">remove</button>
+      <div class="close">&#10006;</div>
     </form>
-    <!-- <div class="cover-block"></div> -->
     <script src="storage.js"></script>
   </body>
 </html>

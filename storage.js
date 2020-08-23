@@ -1,12 +1,4 @@
 class Storage {
-  // constructor(name, ...composition) {
-  //   this.name = name;
-  //   this.composition = [...composition];
-  // }
-  // showInfo() {
-  //   console.log(this.name);
-  //   this.composition.forEach((item) => console.log(item));
-  // }
   DrinkStorage = {
     cola: ["ada", "daw"],
     fanta: ["da", 4],
@@ -79,7 +71,7 @@ const showDrinkComposition = (name) => {
     drinkComposition.innerHTML = "Composition: " + composition;
   } else {
     drinkName.innerHTML = "No info";
-    drinkComposition.innerHTML = "No info";
+    drinkComposition.innerHTML = "Composition: No info";
   }
 };
 
@@ -89,6 +81,12 @@ const highlightDrink = (drink) => {
   }
   drink.classList.add("highlight");
   selectedDrink = drink;
+  flicker();
+};
+
+const getDrinkNode = (name) => {
+  const drinkList = [...document.querySelectorAll(".drink-item")];
+  return drinkList.find((item) => item.innerHTML === name);
 };
 
 const searchDrink = () => {
@@ -97,13 +95,25 @@ const searchDrink = () => {
 
   if (name) {
     showDrinkComposition(name);
-    hideSearchModal();
+    hideModal();
+    flicker();
   }
 
-  form.onsubmit = () => false;
+  const node = getDrinkNode(name);
+  if (!node && selectedDrink) {
+    selectedDrink.classList.remove("highlight");
+    selectedDrink = null;
+  } else if (node) {
+    highlightDrink(node);
+  }
+
+  form.onsubmit = () => {
+    form["search-drink"].value = "";
+    return false;
+  };
 };
 
-const showSearchModal = () => {
+const showModal = (flag) => {
   const coverBlock = document.createElement("div");
   coverBlock.classList.add("cover-block");
   document.body.append(coverBlock);
@@ -111,12 +121,59 @@ const showSearchModal = () => {
 
   const searchForm = document.getElementById("search-form");
   searchForm.style.display = "block";
+
+  if (flag) {
+    searchBtn.style.display = "block";
+    removeBtn.style.display = "none";
+
+    const formHeader = document.querySelectorAll(".header")[3];
+    formHeader.innerHTML = "Search drink";
+  } else {
+    removeBtn.style.display = "block";
+    searchBtn.style.display = "none";
+
+    const formHeader = document.querySelectorAll(".header")[3];
+    formHeader.innerHTML = "Remove drink";
+  }
 };
 
-const hideSearchModal = () => {
+const hideModal = () => {
   document.querySelector(".cover-block").remove();
   document.body.style.overflowY = "";
   document.getElementById("search-form").style.display = "none";
+};
+
+const removeDrink = () => {
+  const form = document.getElementById("search-form");
+  const name = form["search-drink"].value;
+  const node = getDrinkNode(name);
+
+  if (!node) {
+    hideModal();
+    alert("the are no drinks with that name");
+  } else {
+    drinks.deleteValue(name);
+    node.remove();
+    hideModal();
+    alert("deleted");
+  }
+
+  form.onsubmit = () => {
+    form["search-drink"].value = "";
+    return false;
+  };
+};
+
+const flicker = () => {
+  const infoBlock = document.querySelector(".drink-info");
+  const infoHeader = document.querySelectorAll(".header")[2];
+  infoBlock.style.borderColor = "lightgreen";
+  infoHeader.style.color = "lightgreen";
+
+  setTimeout(() => {
+    infoBlock.style.borderColor = "rgb(255, 115, 0)";
+    infoHeader.style.color = "rgb(255, 115, 0)";
+  }, 1500);
 };
 
 ////////////////////
@@ -135,8 +192,18 @@ drinkList.addEventListener("click", (event) => {
   }
 });
 
-const btnSearchOpen = document.querySelector(".btn-search__open");
-btnSearchOpen.addEventListener("click", showSearchModal);
 const searchBtn = document.querySelector(".btn-search");
 searchBtn.addEventListener("click", searchDrink);
+
+const removeBtn = document.querySelector(".btn-remove");
+removeBtn.addEventListener("click", removeDrink);
+
+const btnSearchOpen = document.querySelector(".btn-search__open");
+btnSearchOpen.addEventListener("click", () => showModal(true));
+
+const btnRemoveOpen = document.querySelector(".btn-remove__open");
+btnRemoveOpen.addEventListener("click", () => showModal(false));
+
+const closeButt = document.querySelector(".close");
+closeButt.addEventListener("click", hideModal);
 /////////////////////////

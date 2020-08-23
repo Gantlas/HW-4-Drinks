@@ -22,7 +22,6 @@ body {
   width: 20%;
   border: 2px solid rgb(255, 115, 0);
   border-radius: 15px;
-  height: 40vh;
   padding: 10px;
 }
 
@@ -40,8 +39,7 @@ body {
   margin-bottom: 20px;
 }
 
-.btn-create,
-.btn-search {
+.btn-create {
   width: 50%;
   border: 1px solid black;
   border-radius: 5px;
@@ -61,6 +59,7 @@ body {
 .header {
   color: rgb(255, 115, 0);
   margin-bottom: 10px;
+  transition-duration: 0.7s;
 }
 
 .drink-list-wrapper {
@@ -101,6 +100,7 @@ body {
   border-radius: 15px;
   height: 40vh;
   padding: 10px;
+  transition-duration: 0.7s;
 }
 
 .drink-name {
@@ -121,24 +121,34 @@ body {
   left: 50%;
   z-index: 2;
   transform: translate(-50%, -50%);
-  /* width: 20vw; */
-  /* height: 30vh; */
+  width: 250px;
+  height: 200px;
   text-align: center;
   display: flex;
   flex-direction: column;
+  display: none;
   align-items: center;
   background-color: white;
   border: 2px solid rgb(255, 115, 0);
   border-radius: 10px;
   padding: 20px;
-  display: none;
 }
 
-#search-form::before {
+.btn-search,
+.btn-remove {
+  width: 50%;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: rgb(255, 115, 0);
+  cursor: pointer;
+  display: none;
+  margin: 0 auto;
+}
+
+.close {
   position: absolute;
   top: 5px;
   right: 10px;
-  content: "\2716";
   font-size: 1rem;
   color: rgb(255, 115, 0);
   font-weight: bold;
